@@ -1,0 +1,48 @@
+﻿@using ManagmentCentral.Client.Services
+@if (Del)
+{
+    <h3>Delete</h3>
+    <p>Do you wish to delete this device?</p>
+}
+else
+{
+    <h3>Details</h3>
+}
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        Device Id
+    </dt>
+    <dd class="col-sm-10">
+        @Device.Id
+    </dd>
+    <dt class="col-sm-2">
+        Location
+    </dt>
+    <dd class="col-sm-10">
+        @Device.Location
+    </dd>
+    <dt class="col-sm-2">
+        Date
+    </dt>
+    <dd class="col-sm-10">
+        @Device.Date.ToString("yyyy-MM-dd")
+    </dd>
+    <dt class="col-sm-2">
+        Device typ
+    </dt>
+    <dd class="col-sm-10">
+        @Device.DeviceType
+    </dd>
+    <dt class="col-sm-2">
+        Status
+    </dt>
+    <dd class="col-sm-10">
+        @Device.Status
+    </dd>
+</dl>
+@if (Del)
+{
+    <a class="btn btn-danger mt-3 me-3" @onclick="() => Delete(Device.Id)">Delete</a>
+}
+<a href="@($"devicelst")" class="btn btn-outline-primary mt-3">Back to Device list</a>

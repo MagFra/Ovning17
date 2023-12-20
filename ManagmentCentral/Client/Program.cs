@@ -1,4 +1,5 @@
 using ManagmentCentral.Client;
+using ManagmentCentral.Client.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -18,6 +19,7 @@ namespace ManagmentCentral.Client
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("ManagmentCentral.ServerAPI"));
+            builder.Services.AddSingleton<IDeviceDataService, DeviceDataService>();
 
             builder.Services.AddApiAuthorization();
 

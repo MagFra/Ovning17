@@ -1,19 +1,23 @@
 using DeviceManager.Shared.Domain;
+using ManagmentCentral.Client.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace ManagmentCentral.Client.Components
 {
     public partial class DeviceList
     {
+        [Parameter]
+        public string ExtraCaption { get; set; } = string.Empty;
+        [Parameter]
+        public bool ShowButtons { get; set; }
+        [Inject]
+        IDeviceDataService? _deviceDataService { get; set; }
         public List<Device> Devices { get; set; } = new List<Device>();
 
         protected override void OnInitialized()
         {
+            Devices = _deviceDataService?.GetDevices()!;
             base.OnInitialized();
-
-            Devices.Add(new Device() { DeviceId = Guid.NewGuid(), Location = Location.Sweden, Date = new DateTime(), DeviceType = "DeviceType1", Status = Status.online });
-
-            Devices.Add(new Device() { DeviceId = Guid.NewGuid(), Location = Location.England, Date = new DateTime(), DeviceType = "DeviceType2", Status = Status.offline });
         }
 
     }

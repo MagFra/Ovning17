@@ -1,0 +1,9 @@
+﻿@page "/devicedetails/{Id:int}"
+@using ManagmentCentral.Client.Components
+
+<DevDetails Id=Id Del=false></DevDetails>
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+}
