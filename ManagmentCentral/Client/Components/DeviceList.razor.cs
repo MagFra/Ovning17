@@ -1,5 +1,5 @@
-using DeviceManager.Shared.Domain;
 using ManagmentCentral.Client.Services;
+using ManagmentCentral.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 
 namespace ManagmentCentral.Client.Components

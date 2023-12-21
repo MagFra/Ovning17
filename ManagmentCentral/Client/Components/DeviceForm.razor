@@ -1,0 +1,57 @@
+﻿@using ManagmentCentral.Client.Services
+@using ManagmentCentral.Shared.Domain
+@if (Create)
+{
+    <h3>Add new device</h3>
+}
+else
+{
+    <h3>Uppdate device</h3>
+}
+<hr />
+
+<EditForm Model="@Device" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            Location
+        </dt>
+        <dd class="col-sm-10">
+            <InputSelect id="Location" @bind-Value="Device.Location" class="form-control col-md-8">
+                @foreach (var location in Enum.GetValues(typeof(Location)))
+                {
+                    <option value="@location">@location</option>
+                }
+            </InputSelect>
+        </dd>
+        <dt class="col-sm-2">
+            Date
+        </dt>
+        <dd class="col-sm-10">
+            <InputDate id="Date" @bind-Value="Device.Date" class="form-control col-md-8"></InputDate>
+        </dd>
+        <dt class="col-sm-2">
+            Device typ
+        </dt>
+        <dd class="col-sm-10">
+            <InputText id="DeviceType" @bind-Value="Device.DeviceType" class="form-control col-md-8"></InputText>
+            <ValidationMessage For="@(() => Device.DeviceType)" />
+        </dd>
+        <dt class="col-sm-2">
+            Status
+        </dt>
+        <dd class="col-sm-10">
+            <InputSelect id="Status" @bind-Value="Device.Status" class="form-control col-md-8">
+                @foreach (var status in Enum.GetValues(typeof(Status)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </dd>
+    </dl>
+
+
+    <a href="@($"listofdevices")" class="btn btn-outline-primary">Back to Device list</a>&nbsp;
+    <button type="submit" class="btn btn-primary me-1">Save Device</button>
+</EditForm>

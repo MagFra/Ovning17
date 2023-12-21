@@ -6,20 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeviceManager.Shared.Domain
+namespace ManagmentCentral.Shared.Domain
 {
-
-    public enum Status
-    {
-        online,
-        offline
-    }
-
-    public enum Location
-    {
-        Sweden,
-        England
-    }
     public class Device
     {
         [Key]

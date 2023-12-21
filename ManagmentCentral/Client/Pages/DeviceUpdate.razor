@@ -1,0 +1,11 @@
+﻿@using ManagmentCentral.Client.Components
+@page "/deviceupdate/{Id:int}"
+
+<DeviceForm Create=false Id=Id></DeviceForm>
+
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public int Id { get; set; }
+}

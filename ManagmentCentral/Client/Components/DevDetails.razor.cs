@@ -1,5 +1,5 @@
-using DeviceManager.Shared.Domain;
 using ManagmentCentral.Client.Services;
+using ManagmentCentral.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 
 namespace ManagmentCentral.Client.Components
@@ -7,10 +7,10 @@ namespace ManagmentCentral.Client.Components
     public partial class DevDetails
     {
         [Inject]
-        public IDeviceDataService? _deviceDataService { get; set; }
+        public IDeviceDataService _deviceDataService { get; set; } = default!;
 
         [Inject]
-        public NavigationManager? _navigationManager { get; set; }
+        public NavigationManager _navigationManager { get; set; } = default!;
 
 
         [Parameter]

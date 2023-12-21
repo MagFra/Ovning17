@@ -1,4 +1,4 @@
-﻿using DeviceManager.Shared.Domain;
+﻿using ManagmentCentral.Shared.Domain;
 
 namespace ManagmentCentral.Client.Services
 {
