@@ -11,12 +11,12 @@ namespace ManagmentCentral.Client.Components
         [Parameter]
         public bool ShowButtons { get; set; }
         [Inject]
-        IDeviceDataService? _deviceDataService { get; set; }
+        IDeviceDataService _deviceDataService { get; set; } = default!;
         public List<Device> Devices { get; set; } = new List<Device>();
 
         protected override void OnInitialized()
         {
-            Devices = _deviceDataService?.GetDevices()!;
+            Devices = _deviceDataService.GetDevices();
             base.OnInitialized();
         }
 
