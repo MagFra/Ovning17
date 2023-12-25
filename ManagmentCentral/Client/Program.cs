@@ -19,10 +19,12 @@ namespace ManagmentCentral.Client
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("ManagmentCentral.ServerAPI"));
-            builder.Services.AddSingleton<IDeviceDataService, DeviceDataService>();
-
             builder.Services.AddApiAuthorization();
 
+            var apiBaseAddress = "https://localhost:7085";
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(apiBaseAddress) });
+
+            builder.Services.AddSingleton<IDeviceDataService, DeviceDataService>();
             await builder.Build().RunAsync();
         }
     }

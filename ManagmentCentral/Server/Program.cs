@@ -3,12 +3,16 @@ using ManagmentCentral.Server.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using ManagmentCentral.Client;
+using ManagmentCentral.Server.Extensions;
+//    ManagementCentral
 
-namespace ManagmentCentral
+namespace ManagmentCentral.Server
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -19,10 +23,16 @@ namespace ManagmentCentral
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
+                    options =>
+                    {
+                        options.IdentityResources["openid"].UserClaims.Add("role");
+                        options.ApiResources.Single().UserClaims.Add("role");
+                    });
 
             builder.Services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -37,6 +47,7 @@ namespace ManagmentCentral
             {
                 app.UseMigrationsEndPoint();
                 app.UseWebAssemblyDebugging();
+                await app.SeedDataAsync();
             }
             else
             {

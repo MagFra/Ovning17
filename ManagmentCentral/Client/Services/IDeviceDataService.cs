@@ -4,7 +4,7 @@ namespace ManagmentCentral.Client.Services
 {
     public interface IDeviceDataService
     {
-        List<Device> GetDevices();
+        public Task<List<Device>> GetDevicesAsync();
 
         Device GetDevice(int? Id);
 

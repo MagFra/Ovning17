@@ -14,9 +14,9 @@ namespace ManagmentCentral.Client.Components
         IDeviceDataService _deviceDataService { get; set; } = default!;
         public List<Device> Devices { get; set; } = new List<Device>();
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            Devices = _deviceDataService.GetDevices();
+            Devices = await _deviceDataService.GetDevicesAsync();
             base.OnInitialized();
         }
 

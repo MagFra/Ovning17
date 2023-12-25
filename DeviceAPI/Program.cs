@@ -1,5 +1,6 @@
 using DeviceAPI.Collections;
 using DeviceAPI.Endpoints;
+using ManagmentCentral.Shared.Domain;
 using Microsoft.Extensions.Options;
 
 
@@ -12,9 +13,7 @@ namespace DeviceAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddAuthorization();
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddAuthentication().AddJwtBearer();
             builder.Services.AddAuthorization();
             var specOrigin = "MySpecOrigin";
@@ -28,9 +27,11 @@ namespace DeviceAPI
                 });
             });
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSingleton<IDeviceDataService, DeviceDataService>();
+
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddSingleton<IDeviceDataService, DeviceDataService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
